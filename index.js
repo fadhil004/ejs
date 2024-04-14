@@ -20,8 +20,25 @@ app.post('/register', (req, res) => {
     })
 })
 
+app.get('/products', (req, res) => {
+    let result
+    if (req.query.tag){
+        result = products.filter((product) => product.tag === req.query.tag)
+    } else if (req.query.brand){
+        result = products.filter((product) => product.brand === req.query.brand)
+    } else{
+        result = products
+    }
 
+    res.send(result)
+})
+
+app.get('/products/:id', (req, res) => {
+    const result = products.filter((product) => product.id === req.params.id)
+    res.send(result)
+})
 
 app.listen(port, (req,res) => {
     console.log(`app running on port ${port}`)
 })
+

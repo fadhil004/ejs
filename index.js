@@ -4,10 +4,30 @@ const port = 3000
 
 const fs = require('fs');
 const products = JSON.parse(fs.readFileSync('./products.json', 'utf-8'))
-console.log(products)
+const users = JSON.parse(fs.readFileSync('./users.json', 'utf-8'))
+console.log(users)
 
 app.use(express.urlencoded({extended: false})) //untuk parsing atau membuat aplikasi bisa membaca inputan dari user
 app.use(express.json())
+
+const isLogin = (req, res, next) => {
+    if(req.body.token){
+        next()
+    } else {
+        res.send('you should login first')
+    }
+}
+
+app.post('/login', (req, res) => {
+    const [loggedUser] = users.filter((user) => user.email === req.body.email)
+    if (loggedUser && loggedUser.password === req.body.password){
+        res.send({
+            token: 'this-is-token'
+        })
+    } else {
+        res.send('invalid email/password')
+    }
+})
 
 app.get('/', (req,res) => {
     res.send('Hai!')
@@ -20,7 +40,7 @@ app.post('/register', (req, res) => {
     })
 })
 
-app.get('/products', (req, res) => {
+app.get('/products', isLogin, (req, res) => {
     let result
     if (req.query.tag){
         result = products.filter((product) => product.tag === req.query.tag)

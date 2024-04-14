@@ -1,17 +1,22 @@
 const express = require('express')
+const fs = require('fs');
+const session = require('express-session');
+
 const app = express()
 const port = 3000
 
-const fs = require('fs');
+
 const products = JSON.parse(fs.readFileSync('./products.json', 'utf-8'))
 const users = JSON.parse(fs.readFileSync('./users.json', 'utf-8'))
 console.log(users)
+const secret ={secret: 'secret', resave: false, saveUninitialized: true, cookies: {}}
 
 app.use(express.urlencoded({extended: false})) //untuk parsing atau membuat aplikasi bisa membaca inputan dari user
 app.use(express.json())
+app.use(session(secret))
 
 const isLogin = (req, res, next) => {
-    if(req.body.token){
+    if(req.session.user && req.session.user.email){
         next()
     } else {
         res.send('you should login first')
@@ -21,12 +26,19 @@ const isLogin = (req, res, next) => {
 app.post('/login', (req, res) => {
     const [loggedUser] = users.filter((user) => user.email === req.body.email)
     if (loggedUser && loggedUser.password === req.body.password){
+        req.session.user = { email: loggedUser.email } //karena masih data dummy dan blom ada id
         res.send({
             token: 'this-is-token'
         })
     } else {
         res.send('invalid email/password')
     }
+})
+
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.send('Logout succsess')
+    })
 })
 
 app.get('/', (req,res) => {

@@ -11,6 +11,7 @@ const users = JSON.parse(fs.readFileSync('./users.json', 'utf-8'))
 console.log(users)
 const secret ={secret: 'secret', resave: false, saveUninitialized: true, cookies: {}}
 
+app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: false})) //untuk parsing atau membuat aplikasi bisa membaca inputan dari user
 app.use(express.json())
 app.use(session(secret))
@@ -42,7 +43,7 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/', (req,res) => {
-    res.send('Hai!')
+    res.render('home.ejs')
 })
 
 app.post('/register', (req, res) => {

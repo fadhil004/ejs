@@ -20,6 +20,8 @@ app.post('/register', (req, res) => {
     })
 })
 
+
+
 app.listen(port, (req,res) => {
     console.log(`app running on port ${port}`)
 })

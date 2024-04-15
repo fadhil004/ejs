@@ -11,5 +11,8 @@
         <img src="<%= products[i].image_url  %>" widht="100px" height="100px"" alt="">
         <h3><%= `${products[i].tag} ${products[i].brand}` %></h3>
     <% } %>
+    <% if (products.length === 0) { %>
+        <p>Sorry, products not found...</p>
+    <% } %>
 </body>
 </html>

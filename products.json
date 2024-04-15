@@ -2,17 +2,20 @@
     {
       "id": "1",
       "tag": "hp",
-      "brand": "sumsang"
+      "brand": "sumsang",
+      "image_url": "https://images.samsung.com/is/image/samsung/p6pim/id/2401/gallery/id-galaxy-s24-s928-sm-s928bztqxid-thumb-539319761"
     },
     {
       "id": "2",
       "tag": "tv",
-      "brand": "siumay"
+      "brand": "siumay",
+      "image_url": "https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1649317354.62688461.png?thumb=1&w=500&q=85"
     },
     {
       "id": "3",
       "tag": "hp",
-      "brand": "iphun"
+      "brand": "iphun",
+      "image_url": "https://cdn.eraspace.com/media/catalog/product/a/p/apple_iphone_15_plus_pink_1_4.jpg"
     }
   ]
   

@@ -7,6 +7,9 @@
 </head>
 <body style="background-color: antiquewhite;">
     <h1>Home</h1>
-    <%= `${ JSON.stringify(products) }` %>
+    <% for (let i=0; i<products.length; i++ ) { %>
+        <img src="<%= products[i].image_url  %>" widht="100px" height="100px"" alt="">
+        <h3><%= `${products[i].tag} ${products[i].brand}` %></h3>
+    <% } %>
 </body>
 </html>

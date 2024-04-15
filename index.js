@@ -43,7 +43,9 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/', (req,res) => {
-    res.render('home.ejs')
+    res.render('home.ejs', {
+        products: products
+    })
 })
 
 app.post('/register', (req, res) => {

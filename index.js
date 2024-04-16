@@ -24,15 +24,17 @@ const isLogin = (req, res, next) => {
     }
 }
 
+app.get('/login', (req, res) => {
+    res.render('login', {})
+})
+
 app.post('/login', (req, res) => {
     const [loggedUser] = users.filter((user) => user.email === req.body.email)
     if (loggedUser && loggedUser.password === req.body.password){
         req.session.user = { email: loggedUser.email } //karena masih data dummy dan blom ada id
-        res.send({
-            token: 'this-is-token'
-        })
+        res.redirect('/')
     } else {
-        res.send('invalid email/password')
+        res.redirect('/login')
     }
 })
 
@@ -55,7 +57,7 @@ app.post('/register', (req, res) => {
     })
 })
 
-app.get('/products', isLogin, (req, res) => {
+app.get('/products', (req, res) => {
     let result
     if (req.query.tag){
         result = products.filter((product) => product.tag === req.query.tag)
@@ -65,7 +67,7 @@ app.get('/products', isLogin, (req, res) => {
         result = products
     }
 
-    res.send(result)
+    res.render('home', { products: result})
 })
 
 app.get('/products/:id', (req, res) => {

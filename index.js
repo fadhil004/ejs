@@ -20,7 +20,7 @@ const isLogin = (req, res, next) => {
     if(req.session.user && req.session.user.email){
         next()
     } else {
-        res.send('you should login first')
+        res.redirect('/login')
     }
 }
 
@@ -40,7 +40,7 @@ app.post('/login', (req, res) => {
 
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
-        res.send('Logout succsess')
+        res.redirect('/login')
     })
 })
 
@@ -57,7 +57,7 @@ app.post('/register', (req, res) => {
     })
 })
 
-app.get('/products', (req, res) => {
+app.get('/products', isLogin, (req, res) => {
     let result
     if (req.query.tag){
         result = products.filter((product) => product.tag === req.query.tag)

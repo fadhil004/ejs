@@ -55,7 +55,6 @@
     <%- include('partials/navbar')%>
     <div>
         <h1>Edit Product</h1>
-        <p><%= `${JSON.stringify(product)}` %></p>
         <form action="/products/edit/<%= product.id %>" method="POST">
             <label for="">Brand</label>
             <input type="text" name="brand" value="<%= product.brand %>">

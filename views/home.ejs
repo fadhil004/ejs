@@ -56,6 +56,10 @@
                 <div id="products-card">
                     <img src="<%= products[i].image_url  %>"  alt="">
                     <h3><%= `${products[i].tag} ${products[i].brand}` %></h3>
+                    <p>Rp. <%= `${products[i].price}` %></p>
+                    <p>stock: <%= `${products[i].stock}` %></p>
+                    <button><a href="/products/edit/<%= products[i].id %>">edit</a></button>
+                    <button><a href="/products/delete/<%= products[i].id %>">delete</a></button>
                 </div>
             <% } %>
             <% if (products.length === 0) { %>

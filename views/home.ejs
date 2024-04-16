@@ -4,19 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        input[type=text] {
+            width: 80%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type=submit] {
+            width: 10%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+
+        }
+        img {
+            widht:150px;
+            height: 150px;
+        }
+        div[id = outer] {
+            margin: 50px;
+        }
+        div[id = products] {
+            display: flex;
+            margin-top: 50px;
+        }
+        div[id = products-card] {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 2%;
+        }
+    </style>
 </head>
-<body style="background-color: antiquewhite;">
-    <h1>Home</h1>
-    <form method="get" action="/products">
-        <input type="text" name="tag">
-        <button type="submit">Search</button>
-    </form>
-    <% for (let i=0; i<products.length; i++ ) { %>
-        <img src="<%= products[i].image_url  %>" widht="100px" height="100px"" alt="">
-        <h3><%= `${products[i].tag} ${products[i].brand}` %></h3>
-    <% } %>
-    <% if (products.length === 0) { %>
-        <p>Sorry, products not found...</p>
-    <% } %>
+<body>
+    <div id="outer">
+        <h1>Products</h1>
+        <form method="get" action="/products">
+            <input type="text" name="tag">
+            <button type="submit">Search</button>
+        </form>
+        <div id="products">
+            <% for (let i=0; i<products.length; i++ ) { %>
+                <div id="products-card">
+                    <img src="<%= products[i].image_url  %>"  alt="">
+                    <h3><%= `${products[i].tag} ${products[i].brand}` %></h3>
+                </div>
+            <% } %>
+            <% if (products.length === 0) { %>
+                <p>Sorry, products not found...</p>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>
